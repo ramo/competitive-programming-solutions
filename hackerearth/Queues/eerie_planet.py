@@ -1,5 +1,5 @@
 """
-https://www.hackerearth.com/fr/practice/data-structures/queues/basics-of-queues/practice-problems/algorithm/weird-planet-2000a170/
+c
 """
 
 from sys import stdin

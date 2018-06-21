@@ -2,7 +2,7 @@
 https://www.hackerearth.com/fr/practice/data-structures/queues/basics-of-queues/practice-problems/algorithm/weird-planet-2000a170/
 Note: Please see eerie_planet.py for the accepted solution at O(n Log n) solution where n = c+q;
 Below solution has an average run time with respect to the current test cases of the problem, of O(c+q);
-But still the worst case run time is O(cq) and it is not preferable. 
+But still the worst case run time is O(cq) and it is not preferable.
 """
 
 
