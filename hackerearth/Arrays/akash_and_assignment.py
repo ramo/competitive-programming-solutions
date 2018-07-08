@@ -15,25 +15,22 @@ def get_line():
 
 n, q = map(int, get_line().split())
 s = get_line()
-lookup = [[0] * 26 for _ in range(n)]
-for i in range(n):
-    if i - 1 >= 0:
-        for alpha in range(26):
-            lookup[i][alpha] = lookup[i-1][alpha]
-    lookup[i][ord(s[i]) - ord('a')] += 1
+lookup = [[0] * 26 for _ in range(n+1)]
+for i in range(1, n+1):
+    for alpha in range(26):
+        lookup[i][alpha] = lookup[i-1][alpha]
+    lookup[i][ord(s[i-1]) - ord('a')] += 1
+
+ans = []
 for _ in range(q):
     l, r, k = map(int, get_line().split())
-    l -= 1
-    r -= 1
     if r - l + 1 < k:
-        print('Out of range')
+        ans.append('Out of range')
     else:
-        tmpr = [x for x in lookup[r]]
-        if l > 0:
-            for y in range(26):
-                tmpr[y] -= lookup[l-1][y]
-        for i in range(26):
-            k -= tmpr[i]
-            if k <= 0:
-                print(chr(i + ord('a')))
+        cnt = 0
+        for a in range(26):
+            cnt += lookup[r][a] - lookup[l - 1][a]
+            if cnt >= k:
+                ans.append(chr(a + ord('a')))
                 break
+print('\n'.join(ans))

@@ -1,3 +1,8 @@
+"""
+https://www.hackerearth.com/practice/data-structures/arrays/1-d/practice-problems/algorithm/i-demand-trial-by-combat-13/
+"""
+# This is an adhoc problem where we are identifying certain repeated patterns
+# and skipping the extra loops to save runtime of the program.
 for _ in range(int(input())):
     n, m = map(int, input().split())
     a = input().split()
