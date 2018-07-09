@@ -1,5 +1,10 @@
 /**
  * https://www.spoj.com/problems/MSE06H/
+ * This is a bipartie graph problem broken down to 
+ * point update range query problem and solved by BIT
+ * For each test case:
+ * 			Time complexity: O(K Log K) + O(K Log M)
+ *			Space complexity: O(N)
  */
 #include <iostream>
 #include <vector>
