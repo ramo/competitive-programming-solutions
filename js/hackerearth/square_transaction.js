@@ -3,6 +3,21 @@
  */
 "use strict"
 
+function binary_search(ps, target) {
+    var s = 0, e = ps.length-1;
+    var result = -1;
+    while (s <= e) {
+        let mid = s + Math.floor((e-s) / 2);
+        if (ps[mid] < target) {
+            s = mid+1;
+        } else { //if (ps[mid] >= target) 
+            e = mid-1;
+            result = mid+1;
+        }
+    }
+    return result;
+}
+
 function main(args) {
     var n = Number(args.shift());
     var arr = args.shift().split(' ').map(Number);
@@ -15,10 +30,10 @@ function main(args) {
     for (let i = 0; i < q; i++) {
         let t = Number(args[i]);
         /**
-         * TODO
          * We can find the index using binary search as the ps list is 
          * increasing order (sorted).
          */
+        console.log(binary_search(ps, t));
     }
 }
 
