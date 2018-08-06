@@ -10,10 +10,13 @@ function binarySearch(arr, key) {
     let ans = -1;
     while (s <= e) {
         let mid = s + Math.floor((e - s) / 2);
-        if (arr[mid] == key) {
-            ans = mid;
-            break;
-        } else if (arr[mid] < key) {
+        /**
+         * Note:
+         * In the case of duplicate keys, to find
+         * the max position key. We are not breaking 
+         * when we find the key. 
+         */
+        if (arr[mid] <= key) {
             ans = mid;
             s = mid+1;
         } else {
