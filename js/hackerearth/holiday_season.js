@@ -2,51 +2,54 @@
  * https://www.hackerearth.com/practice/algorithms/searching/linear-search/practice-problems/algorithm/holiday-season-ab957deb/
  */
 "use strict"
-
+    
 function main(args) {
     var n = parseInt(args[0]);
     var str = args[1];
-    var hash = {};
-    var next = [];
-    for (let i = n-1; i >= 0; i--) {
-        let c = str.charAt(i);
-        if (hash[c]) {
-            next[i] = hash[c];
-        } else {
-            next[i] = -1;
-        }
-        hash[c] = i;
-    }
-
     var ans = 0;
-    for (let i = 0; i < n; i++) {
-        if (next[i] === -1) {
-            continue;
-        } 
-        for (let j = i+1; j < next[i]; j++) {
-            for (let x = next[j]; x != -1; x = next[x]) {
-                if (x > next[i]) {
-                    ++ans;
-                }
+    //brute force solution O(N^4), TLE solution
+    // for (let a = 0; a < n; a++) {
+    //     for (let b = a+1; b < n; b++) {
+    //         for (let c = b+1; c < n; c++) {
+    //             for (let d = c+1; d < n; d++) {
+    //                 if (str.charAt(a) === str.charAt(c) && str.charAt(b) === str.charAt(d)) {
+    //                     ++ans;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    
+    /**
+     * Going for O(N^2) solution
+     */
+    var lookup = [];
+    for (let i = 0; i < 26; i++) {
+        lookup[i] = 0;
+    }
+    
+    var cnt = 0;
+    for (let b = 0; b < n; b++) {
+        cnt = 0;
+        for (let d = b+1; d < n; d++) {
+            if (str[b] === str[d]) {
+                ans += cnt;
             }
+            cnt += lookup[str[d].charCodeAt(0) - 97];
         }
+        ++lookup[str[b].charCodeAt(0) - 97];
     }
     console.log(ans);
 }
-
-var fs = require('fs');
-var data = fs.readFileSync('/Users/ramachandranr/Desktop/input.txt', 'utf-8');
-main(data.split("\n"));
-
-
-// process.stdin.resume();
-// process.stdin.setEncoding('utf-8');
-// var stdin_input = "";
-
-// process.stdin.on("data", function(input) {
-//  stdin_input += input;
-// });
-
-// process.stdin.on("end", function() {
-//  main(stdin_input.split("\n"));
-// });
+    
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+var stdin_input = "";
+    
+process.stdin.on("data", function(input) {
+    stdin_input += input;
+});
+    
+process.stdin.on("end", function() {
+    main(stdin_input.split("\n"));
+});
