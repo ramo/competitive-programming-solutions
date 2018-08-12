@@ -1,6 +1,8 @@
 """
 https://www.hackerearth.com/practice/basic-programming/input-output/basics-of-input-output/practice-problems/algorithm/minimise-cost-89b54cb9/
 """
+
+
 def main():
     # Get the inputs
     n, k = [int(x) for x in input().split()]
@@ -15,11 +17,17 @@ def main():
         # So, if the value 'i' pointing is negative one, let's skip it.
         if array[i] <= 0:
             continue
+
+        # increment j if needed to make the distance between
+        # i and j as k
+        while i - j > k:
+            j += 1
         
         # This inner while loop is to redeem the negative numbers with positive ones.
         # We can loop till number pointing by 'i' become 0 (or)
-        # 'j' index crossed the distance k from 'i' index
-        while (array[i] > 0) and (j <= i+k):
+        # 'j' index crossed the distance k from 'i' index (or)
+        # 'j' index crossed the array itself (n-1)
+        while (array[i] > 0) and (min(n-1, j) <= i+k):
             
             # 'j' index should point to negative number
             # So, if it's not pointing negative, let's skip it
