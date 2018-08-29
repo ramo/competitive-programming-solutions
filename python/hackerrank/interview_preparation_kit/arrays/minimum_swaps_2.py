@@ -1,17 +1,12 @@
-#!/bin/python3
-
 """
 https://www.hackerrank.com/challenges/minimum-swaps-2/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=arrays
 """
 
-import math
 import os
-import random
-import re
-import sys
+
 
 # Complete the minimumSwaps function below.
-def minimumSwaps(arr):
+def minimum_swaps(arr):
     n = len(arr)
     sorted_arr = sorted(arr)
     pos = {}
@@ -30,12 +25,15 @@ def minimumSwaps(arr):
             swaps += 1
     return swaps
     
-        
 
-if __name__ == '__main__':
+def main():
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
     n = int(input())
     arr = list(map(int, input().rstrip().split()))
-    res = minimumSwaps(arr)
+    res = minimum_swaps(arr)
     fptr.write(str(res) + '\n')
     fptr.close()
+
+
+if __name__ == '__main__':
+    main()
