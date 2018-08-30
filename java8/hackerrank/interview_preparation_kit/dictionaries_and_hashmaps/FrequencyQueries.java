@@ -16,7 +16,7 @@ import static java.util.stream.Collectors.toList;
 public class Solution {
 
     // Complete the freqQuery function below.
-    static List<Integer> freqQuery(List<List<Integer>> queries) {
+    static List<Integer> freqQuery(List<int[]> queries) {
         List<Integer> result = new LinkedList<>();
         Map<Integer, Integer> numberToFrequency = new HashMap<>();
         Map<Integer, Set<Integer>> frequencyToNumberSet = new HashMap<>();
