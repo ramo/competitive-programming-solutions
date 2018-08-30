@@ -1,7 +1,5 @@
 /**
- *
  * https://www.hackerrank.com/challenges/fraudulent-activity-notifications/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=sorting
- * Yet to be solved. Still  some test cases are failing for this solution.
  */
 import java.io.*;
 import java.math.*;
@@ -18,35 +16,44 @@ public class Solution {
         int n = expenditure.length;
         int notif = 0;
 
-        int[] queue = new int[201]; // max value 200
+        // Using count sort algo to sort the array in O(n) time
+        // That too, for n = 200 We get constant running time O(k)
+        int[] queue = new int[201]; // values [0-200]
+        
+        // Add first d-1 elements in the queue
         for (int i = 0; i < d-1; i++) {
             ++queue[expenditure[i]];
         }
 
         for (int i = d, j = 0; i < n; i++, j++) {
+            // To make the queue with d elements, add the i-1th element.
             ++queue[expenditure[i-1]];
+            
             int median2;
             //Get median
             if (d % 2 == 0) { // even
                 median2 = getValue(queue, d / 2) + getValue(queue, d / 2 + 1);
             } else { // odd
-                median2 = 2 * getValue(queue, d / 2);
+                median2 = 2 * getValue(queue, d / 2 + 1);
             }
 
+            // add a notification if the ith expenditure >= 2*median of the previous d entries
             if (expenditure[i] >= median2) {
                 ++notif;
             }
 
-            --queue[expenditure[j]]; // remove the top element from the queue
+            // remove the top element from the queue
+            --queue[expenditure[j]];
         }
 
         return notif;
     }
 
+    // get the stopth element in the queue
     static int getValue(int[] queue, int stop) {
         int start = 0;
         int ans = -1;
-        for (int i = 1; i < queue.length; i++) {
+        for (int i = 0; i < queue.length; i++) {
             if (start + queue[i] >= stop) {
                 ans = i;
                 break;
