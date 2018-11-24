@@ -22,9 +22,9 @@ public class Solution {
         for (int i = 1; i < n; i++) {
             int d = 0;
             while(!stack.isEmpty() && p[stack.peek()] >= p[i]) {
-                d = days[stack.pop()];
+                d = Math.max(days[stack.pop()] + 1, d);
             }
-            days[i] = stack.isEmpty() ? 0 : d + 1;
+            days[i] = stack.isEmpty() ? 0 : Math.max(d, 1);
             stack.push(i);
         }
 
