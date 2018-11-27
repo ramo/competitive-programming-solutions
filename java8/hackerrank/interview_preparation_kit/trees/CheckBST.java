@@ -13,18 +13,22 @@ The Node class is defined as follows:
      }
 */
     boolean checkBST(Node root) {
-        return checkBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        return checkBST(root, null, null);
     }
     
-    boolean checkBST(Node root, int min, int max) {
+    boolean checkBST(Node root, Node min, Node max) {
         if (root == null) {
             return true;
         }
         
-        if (root.data < min || root.data > max) {
+        if (min != null && root.data <= min.data) {
             return false;
         }
-            
-        return checkBST(root.left, min, root.data-1) && 
-            checkBST(root.right, root.data+1, max);
+        
+        if (max != null && root.data >= max.data) {
+            return false;
+        }
+        
+        return checkBST(root.left, min, root) && 
+            checkBST(root.right, root, max);
     }
