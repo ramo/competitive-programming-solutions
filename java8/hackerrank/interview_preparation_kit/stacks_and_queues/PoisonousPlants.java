@@ -12,6 +12,9 @@ import java.util.regex.*;
 
 public class Solution {
 
+    /**
+     * solution using stack. Runtime O(n)
+     */
     static int poisonousPlants(int[] p) {
         Deque<Integer> stack = new ArrayDeque<>();
         stack.push(0);
@@ -26,6 +29,43 @@ public class Solution {
             }
             days[i] = stack.isEmpty() ? 0 : Math.max(d, 1);
             stack.push(i);
+        }
+
+        return Arrays.stream(days).max().getAsInt();
+    }
+
+
+    /**
+     * naive solution. Runtime O(n^2)
+     * But to my surprise, this solution is passing all the test cases.
+     */
+    static int poisonousPlants0(int[] p) {
+        int n = p.length;
+        int[] killer = new int[n];
+        int[] days = new int[n];
+        killer[0] = -1;
+        days[0] = 0;
+        for (int i = 1; i < n; i++) {
+            int k = -1;
+            int j = i-1;
+            int d = 0;
+            while (j >= 0) {
+                if (p[i] > p[j]) {
+                    k = j;
+                    d = Math.max(d, 1);
+                    break;
+                } else {
+                    if (killer[j] == -1) {
+                        d = 0;
+                        break;
+                    } else {
+                        d = Math.max(d, days[j]+1);
+                        j = killer[j];
+                    }
+                }
+            }
+            killer[i] = k;
+            days[i] = d;
         }
 
         return Arrays.stream(days).max().getAsInt();
