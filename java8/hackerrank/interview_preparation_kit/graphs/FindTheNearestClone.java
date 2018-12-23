@@ -14,6 +14,10 @@ import java.util.regex.*;
 public class Solution {
 
     
+    /**
+     *
+     * Solved using bfs algo. Runtime O(|V| + |E|)
+     */
     static int findShortest(int graphNodes, int[] graphFrom, int[] graphTo, long[] ids, long val) {
         // negative case
         List<Integer> myColorNodes = new ArrayList<>();
@@ -116,7 +120,8 @@ public class Solution {
     static int dijkstra(List<List<Integer>> graph, List<Integer> myColorNodes, int y) {
         // dijkstra algo        
         int n = graph.size();
-        int[] d = IntStream.range(1, n+1).map(i -> Integer.MAX_VALUE).toArray();
+        int[] d = new int[n];
+        Arrays.fill(d, Integer.MAX_VALUE);
         boolean[] visited = new boolean[n];
         int s = myColorNodes.get(y);
         d[s] = 0;
